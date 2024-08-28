@@ -6,7 +6,8 @@ import traceback
 import requests
 import bs4
 
-DB_URL = "https://tiphereth.zasz.su/cards/"
+DB_URL = "https://tiphereth.zasz.su"
+DB_COMBAT_CARDS_URL = "https://tiphereth.zasz.su/cards/"
 
 
 class Rarity(enum.Enum):
@@ -90,7 +91,7 @@ class Card(typing.NamedTuple):
 
 
 def scrap(queries: typing.Dict[str, typing.Any] = {}) -> typing.List[Card]:
-    raw = requests.get(DB_URL, queries).text
+    raw = requests.get(DB_COMBAT_CARDS_URL, queries).text
     soup = bs4.BeautifulSoup(raw, "html.parser")
 
     cards = []
@@ -144,7 +145,7 @@ def scrap(queries: typing.Dict[str, typing.Any] = {}) -> typing.List[Card]:
                     "lor-card-desc > span > b").get_text()
             except AttributeError:
                 description = None
-            image = front.select_one("lor-card-image > a > img").attrs["src"]
+            image = DB_URL + front.select_one("lor-card-image > a > img").attrs["src"]
             actions = []
             for raw_action in (back.select_one("lor-card-desc > table > tbody") or back.select_one("lor-card-desc > table")).select("tr"):
 
