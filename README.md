@@ -22,7 +22,7 @@ type Card = {
     is_ego: boolean;
     cost: number;
     image: string;
-    description: string;
+    description: string | null;
     actions: {
         group: "offensive" | "defensive" | "counter";
         type: "pierce" | "slash" | "blunt" | "guard" | "evade";
