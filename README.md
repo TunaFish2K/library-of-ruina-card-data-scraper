@@ -18,6 +18,7 @@ Cards will be stored in folder `out/combat`.
 type Card = {
     name: string;
     availability: "collectable" | "obtainable" | "enemy_only";
+    type: "melee" | "ranged" | "mass_summation" | "mass_individual" | "immediate";
     rarity: "common" | "uncommon" | "rare" | "unique";
     is_ego: boolean;
     cost: number;
